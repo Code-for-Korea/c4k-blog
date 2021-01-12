@@ -65,6 +65,8 @@ GEM
     nokogiri (1.11.0)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
+    nokogiri (1.11.0-x86_64-linux)
+      racc (~> 1.4)
     nokogumbo (2.0.4)
       nokogiri (~> 1.8, >= 1.8.4)
     parallel (1.20.1)
@@ -96,6 +98,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux-musl
 
 DEPENDENCIES
   html-proofer
@@ -110,4 +113,4 @@ DEPENDENCIES
   wdm (~> 0.1.1)
 
 BUNDLED WITH
-   2.1.4
+   2.2.2

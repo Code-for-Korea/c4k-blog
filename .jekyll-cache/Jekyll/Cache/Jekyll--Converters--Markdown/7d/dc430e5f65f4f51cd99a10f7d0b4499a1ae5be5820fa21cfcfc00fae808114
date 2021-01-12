@@ -1,0 +1,142 @@
+I"�+<h2 id="installation">Installation</h2>
+
+<p><a href="https://github.com/cotes2020/jekyll-theme-chirpy/fork">Fork <strong>Chirpy</strong></a> on GitHub, rename the repository to <code class="language-plaintext highlighter-rouge">USERNAME.github.io</code> (where <code class="language-plaintext highlighter-rouge">USERNAME</code> is your GitHub username), and then open terminal and clone the fork to local by:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>git clone https://github.com/USERNAME/USERNAME.github.io.git <span class="nt">-b</span> master <span class="nt">--single-branch</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="setting-up-the-local-envrionment">Setting up the local envrionment</h3>
+
+<p>If you would like to run or build the project on your local machine, please follow the <a href="https://jekyllrb.com/docs/installation/">Jekyll Docs</a> to complete the installation of <code class="language-plaintext highlighter-rouge">Ruby</code>, <code class="language-plaintext highlighter-rouge">RubyGems</code>, <code class="language-plaintext highlighter-rouge">Jekyll</code> and <code class="language-plaintext highlighter-rouge">Bundler</code>.</p>
+
+<p>Before running or building for the first time, please complete the installation of the Jekyll plugins. Go to the root directory of project and run:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>bundle <span class="nb">install</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bundle</code> will automatically install all the dependencies specified by <code class="language-plaintext highlighter-rouge">Gemfile</code>.</p>
+
+<h3 id="setting-up-docker-environment-optional">Setting up Docker environment (optional)</h3>
+
+<p>If you’re a loyal fan of <a href="https://www.docker.com/"><strong>Docker</strong></a> or just too lazy to install the packages mentioned in <a href="#setting-up-the-local-envrionment"><em>Setting up the local envrionment</em></a>, please make sure you have <strong>Docker Engine</strong> installed and running, and then get Docker image <code class="language-plaintext highlighter-rouge">jekyll/jekyll</code> from Docker Hub by the following command:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>docker pull jekyll/jekyll
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="initialization">Initialization</h3>
+
+<p>Go to the root directory of the project and start initialization:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>bash tools/init.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<blockquote>
+  <p><strong>Note</strong>: If you not intend to deploy it on GitHub Pages, append parameter option <code class="language-plaintext highlighter-rouge">--no-gh</code> at the end of the above command.</p>
+</blockquote>
+
+<p>What it does is:</p>
+
+<ol>
+  <li>Remove some files or directories from your repository:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">.travis.yml</code></li>
+      <li>files under <code class="language-plaintext highlighter-rouge">_posts</code></li>
+      <li>folder <code class="language-plaintext highlighter-rouge">docs</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>If you use the <code class="language-plaintext highlighter-rouge">--no-gh</code> option, the directory <code class="language-plaintext highlighter-rouge">.github</code> will be deleted. Otherwise, setup the GitHub Action workflow by removing extension <code class="language-plaintext highlighter-rouge">.hook</code> of <code class="language-plaintext highlighter-rouge">.github/workflows/pages-deploy.yml.hook</code>, and then remove the other files and directories in folder <code class="language-plaintext highlighter-rouge">.github</code>.</p>
+  </li>
+  <li>Automatically create a commit to save the changes.</li>
+</ol>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>Generally, go to <code class="language-plaintext highlighter-rouge">_config.yml</code> and configure the variables as needed. Some of them are typical options:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">url</code></li>
+  <li><code class="language-plaintext highlighter-rouge">avatar</code></li>
+  <li><code class="language-plaintext highlighter-rouge">timezone</code></li>
+  <li><code class="language-plaintext highlighter-rouge">theme_mode</code></li>
+</ul>
+
+<h3 id="run-locally">Run Locally</h3>
+
+<p>You may want to preview the site contents before publishing, so just run it by:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>bundle <span class="nb">exec </span>jekyll s
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then open a browser and visit to <a href="http://localhost:4000">http://localhost:4000</a>.</p>
+
+<h3 id="run-on-docker">Run on Docker</h3>
+
+<p>Run the site on Docker with the following command:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="se">\</span>
+    <span class="nt">--volume</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">:/srv/jekyll"</span> <span class="se">\</span>
+    <span class="nt">-p</span> 4000:4000 jekyll/jekyll <span class="se">\</span>
+    jekyll serve
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="deployment">Deployment</h3>
+
+<p>Before the deployment begins, checkout the file <code class="language-plaintext highlighter-rouge">_config.yml</code> and make sure the <code class="language-plaintext highlighter-rouge">url</code> is configured correctly. Furthermore, if you prefer the <a href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites"><em>project site</em></a> and don’t use a custom domain, or you want to visit your website with a base url on a web server other than <strong>GitHub Pages</strong>, remember to change the <code class="language-plaintext highlighter-rouge">baseurl</code> to your project name that starting with a slash. For example, <code class="language-plaintext highlighter-rouge">/project</code>.</p>
+
+<p>Assuming you have already gone through the <a href="#initialization">initialization</a>, you can now choose ONE of the following methods to deploy your website.</p>
+
+<h4 id="deploy-on-github-pages">Deploy on GitHub Pages</h4>
+
+<p>For security reasons, GitHub Pages build runs on <code class="language-plaintext highlighter-rouge">safe</code> mode, which restricts us from using plugins to generate additional page files. Therefore, we can use <strong>GitHub Actions</strong> to build the site, store the built site files on a new branch, and use that branch as the source of the Pages service.</p>
+
+<ol>
+  <li>
+    <p>Push any commit to <code class="language-plaintext highlighter-rouge">origin/master</code> to trigger the GitHub Actions workflow. Once the build is complete and successful, a new remote branch named <code class="language-plaintext highlighter-rouge">gh-pages</code> will appear to store the built site files.</p>
+  </li>
+  <li>
+    <p>Browse to your repo’s landing page on GitHub and select the branch <code class="language-plaintext highlighter-rouge">gh-pages</code> as the <a href="https://docs.github.com/en/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site">publishing source</a> throught <em>Settings</em> → <em>Options</em> → <em>GitHub Pages</em>:
+ <img src="https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190809/gh-pages-sources.png" alt="gh-pages-sources" width="650" class="normal" /></p>
+  </li>
+  <li>
+    <p>Visit your website at the address indicated by GitHub.</p>
+  </li>
+</ol>
+
+<h4 id="deploy-on-other-platforms">Deploy on Other Platforms</h4>
+
+<p>On platforms other than GitHub, we cannot enjoy the convenience of <strong>GitHub Actions</strong>. Therefore, we should build the site locally (or on some other 3rd-party CI platform) and then put the site files on the server.</p>
+
+<p>Go to the root of the source project, build your site by:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span><span class="nv">JEKYLL_ENV</span><span class="o">=</span>production bundle <span class="nb">exec </span>jekyll b
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Or, build the site with Docker by:</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td> --><td class="rouge-code"><pre><span class="gp">$</span><span class="w"> </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="se">\</span>
+    <span class="nt">--env</span> <span class="nv">JEKYLL_ENV</span><span class="o">=</span>production <span class="se">\</span>
+    <span class="nt">--volume</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PWD</span><span class="s2">:/srv/jekyll"</span> <span class="se">\</span>
+    jekyll/jekyll <span class="se">\</span>
+    jekyll build
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Unless you specified the output path, the generated site files will be placed in folder <code class="language-plaintext highlighter-rouge">_site</code> of the project’s root directory. Now you should upload those files to your web server.</p>
+:ET

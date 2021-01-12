@@ -1,0 +1,60 @@
+I"�
+<p>In <a href="https://github.com/cotes2020/jekyll-theme-chirpy/"><strong>Chirpy</strong></a>, the image files of <a href="https://www.favicon-generator.org/about/">Favicons</a> are placed in <code class="language-plaintext highlighter-rouge">assets/img/favicons/</code>. You may need to replace them with your own. So let’s see how to customize these Favicons.</p>
+
+<p>With a square image (PNG, JPG or GIF) in hand, open the site <a href="https://www.favicon-generator.org/"><em>Favicon &amp; App Icon Generator</em></a> and upload your original image.</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190811/upload-image.png" alt="upload-image" /></p>
+
+<p>Click button <kbd>Create Favicon</kbd> and wait a moment for the website to generate the icons of various sizes automatically.</p>
+
+<p><img src="https://cdn.jsdelivr.net/gh/cotes2020/chirpy-images/posts/20190811/download-icons.png" alt="download-icons" width="600" /></p>
+
+<p>Download the generated package, unzip and delete the following two from the extracted files:</p>
+
+<ul>
+  <li>browserconfig.xml</li>
+  <li>manifest.json</li>
+</ul>
+
+<p>Now, copy the remaining image files (<code class="language-plaintext highlighter-rouge">.PNG</code> and <code class="language-plaintext highlighter-rouge">.ICO</code>) from the extracted <code class="language-plaintext highlighter-rouge">.zip</code> file to cover the original files in the folder <code class="language-plaintext highlighter-rouge">assets/img/favicons/</code>.</p>
+
+<p>The following table helps you understand the changes to the icon file:</p>
+
+<blockquote>
+  <p>✓ means keep, ✗ means delete.</p>
+</blockquote>
+
+<table>
+  <thead>
+    <tr>
+      <th>File(s)</th>
+      <th style="text-align: center">From Favicon &amp; App Icon Generator</th>
+      <th style="text-align: center">From Chirpy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">*.PNG</code></td>
+      <td style="text-align: center">✓</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">*.ICO</code></td>
+      <td style="text-align: center">✓</td>
+      <td style="text-align: center">✗</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">browserconfig.xml</code></td>
+      <td style="text-align: center">✗</td>
+      <td style="text-align: center">✓</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">manifest.json</code></td>
+      <td style="text-align: center">✗</td>
+      <td style="text-align: center">✓</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The next time you build the site, the icon will be replaced with a customized edition.</p>
+:ET

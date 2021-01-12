@@ -1,0 +1,197 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://0.0.0.0:4000</id>
+  <title>Chirpy</title>
+  <subtitle>A minimal, portfolio, sidebar, bootstrap Jekyll theme with responsive web design and focuses on text presentation.</subtitle>
+  <updated>2021-01-12T22:28:49+09:00</updated>
+  <author>
+    <name>Code for Korea</name>
+    <uri>http://0.0.0.0:4000</uri>
+  </author>
+  <link href="/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://0.0.0.0:4000" rel="alternate" type="text/html" />
+  <generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator>
+  <rights> © 2021 Code for Korea </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Enable Google Page Views</title>
+    <link href="http://0.0.0.0:4000/posts/enable-google-pv/" rel="alternate" type="text/html" title="Enable Google Page Views" />
+    <published>2021-01-04T08:32:00+09:00</published>
+  
+    <updated>2021-01-04T08:32:00+09:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/enable-google-pv/</id>
+    <content src="http://0.0.0.0:4000/posts/enable-google-pv/" />
+    <author>
+      <name>Code for Korea</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      This post is to enable Page Views on the Chirpy theme based blog that you just built. This requires technical knowledge and it’s recommended to keep the google_analytics.pv disabled unless you have a good reason. If you website has low traffic, the page views count would discourage you to write more blogs. With that said, let’s start with the setup.
+
+Set up Google Analytics
+
+Create GA account a...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Customize the Favicon</title>
+    <link href="http://0.0.0.0:4000/posts/customize-the-favicon/" rel="alternate" type="text/html" title="Customize the Favicon" />
+    <published>2019-08-11T01:34:00+09:00</published>
+  
+    <updated>2019-08-11T01:34:00+09:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/customize-the-favicon/</id>
+    <content src="http://0.0.0.0:4000/posts/customize-the-favicon/" />
+    <author>
+      <name>Code for Korea</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      In Chirpy, the image files of Favicons are placed in assets/img/favicons/. You may need to replace them with your own. So let’s see how to customize these Favicons.
+
+With a square image (PNG, JPG or GIF) in hand, open the site Favicon &amp;amp; App Icon Generator and upload your original image.
+
+
+
+Click button Create Favicon and wait a moment for the website to generate the icons of various sizes a...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Getting Started</title>
+    <link href="http://0.0.0.0:4000/posts/getting-started/" rel="alternate" type="text/html" title="Getting Started" />
+    <published>2019-08-09T21:55:00+09:00</published>
+  
+    <updated>2019-08-09T21:55:00+09:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/getting-started/</id>
+    <content src="http://0.0.0.0:4000/posts/getting-started/" />
+    <author>
+      <name>Code for Korea</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Installation
+
+Fork Chirpy on GitHub, rename the repository to USERNAME.github.io (where USERNAME is your GitHub username), and then open terminal and clone the fork to local by:
+
+$ git clone https://github.com/USERNAME/USERNAME.github.io.git -b master --single-branch
+
+
+Setting up the local envrionment
+
+If you would like to run or build the project on your local machine, please follow the Jekyll...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Writing a New Post</title>
+    <link href="http://0.0.0.0:4000/posts/write-a-new-post/" rel="alternate" type="text/html" title="Writing a New Post" />
+    <published>2019-08-08T15:10:00+09:00</published>
+  
+    <updated>2019-08-08T15:10:00+09:00</updated>
+  
+    <id>http://0.0.0.0:4000/posts/write-a-new-post/</id>
+    <content src="http://0.0.0.0:4000/posts/write-a-new-post/" />
+    <author>
+      <name>Code for Korea</name>
+    </author>
+
+  
+    
+    <category term="Blogging" />
+    
+    <category term="Tutorial" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Naming and Path
+
+Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts/ of the root directory. Please note that the EXTENSION must be one of md and markdown.
+
+Front Matter
+
+Basically, you need to fill the Front Matter as below at the top of the post:
+
+---
+title: TITLE
+date: YYYY-MM-DD HH:MM:SS +/-TTTT
+categories: [TOP_CATEGORIE, SUB_CATEGORIE]
+tags: [TAG]     # TAG names s...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+
