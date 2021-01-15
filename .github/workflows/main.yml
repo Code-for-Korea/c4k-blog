@@ -25,7 +25,7 @@ jobs:
           jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build"
 
       - name: Make zip file
-        run: zip -qq -r ./$GITHUB_SHA.zip .
+        run: zip -qq -r ./$GITHUB_SHA.zip ${{ github.workspace }}:/srv/jekyll/_site
         shell: bash
 
       - name: Configure AWS credenqtials
@@ -39,10 +39,4 @@ jobs:
         run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://c4kbucket/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: |
-          aws deploy create-deployment --application-name CodeForKoreaBlog\
-          --deployment-config-name CodeDeployDefault.OneAtATime\
-          --deployment-group-name dev\
-          --s3-location bucket=c4kbucket,\
-          bundleType=zip,\
-          key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name CodeForKoreaBlog --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name dev --s3-location bucket=c4kbucket,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
