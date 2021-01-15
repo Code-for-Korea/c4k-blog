@@ -7,7 +7,7 @@
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # --------------------------
-title: Code for Korea Blog                          # the main title
+title: Code for Korea Blog - 코드포코리아 블로그                          # the main title
 
 tagline: HAPPY CIVICHACKING   # it will display as the sub-title
 
@@ -22,7 +22,7 @@ description: >-                        # used by seo meta and the atom feed
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://blog.codefor.kr'
 
-author: Code for Korea                  # change to your full name
+author: 코드포코리아                  # change to your full name
 
 github:
   username: Code-for-Korea             # change to your github username
@@ -32,7 +32,7 @@ github:
 
 social:
   name: Code for Korea                  # it will shows as the copyright owner in Footer
-  # email: example@doamin.com             # change to your email address
+  email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/username      # change to your twitter homepage
