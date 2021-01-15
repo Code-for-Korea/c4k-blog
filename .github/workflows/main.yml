@@ -15,7 +15,12 @@ jobs:
         node-version: [12.16.x]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Grant execute permission for docker
+        run: chmod +x docker
+        sheel: bash
 
       - name: Build
         run: |
