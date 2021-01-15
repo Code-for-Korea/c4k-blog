@@ -32,9 +32,12 @@ github:
 # twitter:
   # username: twitter_username            # change to your twitter username
 
+slack:
+  invite_url: http://bit.ly/codeforkorea
+
 social:
   name: Code for Korea                  # it will shows as the copyright owner in Footer
-  email: example@doamin.com             # change to your email address
+#  email: example@doamin.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
     # - https://twitter.com/username      # change to your twitter homepage

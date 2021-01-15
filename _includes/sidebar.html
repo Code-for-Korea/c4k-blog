@@ -59,6 +59,8 @@
       {% capture url %}
         {%- if entry.type == 'github' -%}
           https://github.com/{{ site.github.username }}
+        {%- if entry.type == 'slack' -%}
+          {{ site.slack.invite_url }}
         {%- elsif entry.type == 'rss' -%}
           {{ "/feed.xml" | relative_url }}
         {%- else -%}
