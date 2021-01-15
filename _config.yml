@@ -13,8 +13,7 @@ sub_title: 코드포코리아
 
 tagline: HAPPY CIVICHACKING   # it will display as the sub-title
 
-page:
-  canonical_url: 'https://blog.codefor.kr'
+canonical_url: 'https://blog.codefor.kr'
 
 description: >-                        # used by seo meta and the atom feed
   코드포코리아는 "시빅해킹을 통해 안전하고 신뢰할 수 있는 사회를 만들자"라는 비전으로 운영되는 온라인 커뮤니티입니다.
@@ -27,6 +26,7 @@ description: >-                        # used by seo meta and the atom feed
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://blog.codefor.kr'
 
+lang: 'ko_KR'
 locale: 'ko_KR'
 
 author: 코드포코리아                  # change to your full name
@@ -55,7 +55,7 @@ google_site_verification: google_meta_tag_verification # change to your verifica
 
 # Only if your site type is GitHub Project sites and doesn't have a custom domain,
 # change below value to '/projectname'.
-baseurl: '/'
+baseurl: ''
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Seoul

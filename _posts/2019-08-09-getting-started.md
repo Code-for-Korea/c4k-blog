@@ -5,6 +5,7 @@ date: 2019-08-09 20:55:00 +0800
 categories: [Blogging, Tutorial]
 tags: [getting started]
 pin: true
+canonical_url: 'https://blog.codefor.kr'
 ---
 
 
