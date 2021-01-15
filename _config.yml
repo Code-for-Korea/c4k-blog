@@ -24,7 +24,7 @@ description: >-                        # used by seo meta and the atom feed
   참여하는 누구나 코드포코리아의 일원입니다.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-#url: 'https://blog.codefor.kr'
+url: 'https://blog.codefor.kr'
 
 lang: 'ko_KR'
 locale: 'ko_KR'
