@@ -3,10 +3,11 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ec2-user/c4k-blog
+    destination: /home/ec2-user/c4k-blog/
+    overwrite: yes
 
 permissions:
-  - object: /home/ec2-user/c4k-blog
+  - object: /home/ec2-user/c4k-blog/
     owner: ec2-user
     group: ec2-user
     mode: 755
