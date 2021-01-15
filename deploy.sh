@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/etc/home/c4k-blog
+REPOSITORY=/home/ec2-user/c4k-blog
 cd $REPOSITORY
 
 docker run -it --rm \
