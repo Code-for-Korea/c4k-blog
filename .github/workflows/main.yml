@@ -25,8 +25,8 @@ jobs:
           jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
 
       - name: Make zip file
-          run: zip -qq -r ./$GITHUB_SHA.zip .
-          shell: bash
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
 
       - name: Configure AWS credenqtials
         uses: aws-actions/configure-aws-credentials@v1
