@@ -3,6 +3,6 @@
 REPOSITORY=/home/ec2-user/c4k-blog
 cd $REPOSITORY
 
-docker run -it --rm \
+docker run -i --rm \
 jekyll/jekyll \
 jekyll build
