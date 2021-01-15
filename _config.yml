@@ -13,7 +13,7 @@ sub_title: 코드포코리아
 
 tagline: HAPPY CIVICHACKING   # it will display as the sub-title
 
-seo_tag:
+page:
   canonical_url: 'https://blog.codefor.kr'
 
 description: >-                        # used by seo meta and the atom feed
