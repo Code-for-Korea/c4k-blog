@@ -20,7 +20,7 @@ jobs:
         
       - name: Grant execute permission for docker
         run: chmod +x docker
-        sheel: bash
+        shell: bash
 
       - name: Build
         run: |
