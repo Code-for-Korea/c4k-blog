@@ -10,10 +10,10 @@
 -
   type: slack
   icon: 'fab fa-slack'
--
+#-
 #  type: twitter
 #  icon: 'fab fa-twitter'
--
+#-
 #  type: email
 #  icon: 'fas fa-envelope'
 #  noblank: true            # open link in current tab
