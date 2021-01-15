@@ -57,9 +57,6 @@ baseurl: ''
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
 timezone: Asia/Seoul
 
-webmaster_verifications:
-  google: 'G-EEGP5NXM46'
-
 google_analytics:
   id: 'G-EEGP5NXM46'          # Fill with your Google Analytics ID
   pv:
