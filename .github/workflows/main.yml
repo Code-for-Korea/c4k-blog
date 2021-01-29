@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: |
           docker run \
-          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+          -v ${{ github.workspace }}/blog:/srv/jekyll -v ${{ github.workspace }}/blog/_site:/srv/jekyll/_site \
           jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build"
 
       - name: Make zip file
