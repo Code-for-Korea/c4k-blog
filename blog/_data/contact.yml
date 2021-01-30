@@ -10,6 +10,9 @@
 -
   type: slack
   icon: 'fab fa-slack'
+-
+  type: facebook
+  icon: 'fab fa-facebook'
 #-
 #  type: twitter
 #  icon: 'fab fa-twitter'

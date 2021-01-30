@@ -58,7 +58,9 @@
     {% for entry in site.data.contact %}
       {% capture url %}
         {%- if entry.type == 'github' -%}
-          https://github.com/{{ site.github.username }}
+          //github.com/{{ site.github.username }}
+        {%- elsif entry.type == 'facebook' -%}
+          //www.facebook.com/{{ site.github.username }}
         {%- elsif entry.type == 'slack' -%}
           {{ site.slack.invite_url }}
         {%- elsif entry.type == 'rss' -%}

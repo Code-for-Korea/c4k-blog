@@ -16,13 +16,6 @@ layout: page
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/github.min.css"/>
 <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/latest/tui-color-picker.min.css"/>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-
-<div id="editor"></div>
-
-
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <!-- Editor's Plugin -->
 <script src="https://uicdn.toast.com/editor-plugin-table-merged-cell/latest/toastui-editor-plugin-table-merged-cell.min.js"></script>
@@ -30,5 +23,39 @@ layout: page
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+
+<div id="editor"></div>
+
+<script>
+    (function () {
+        const chartOptions = {
+            // minWidth: 100,
+            // maxWidth: 600,
+            // minHeight: 100,
+            // maxHeight: 300
+        };
+
+        const colorSyntaxOptions = {
+            // preset: ['#181818', '#292929', '#393939'],
+            useCustomSyntax: true
+        };
+
+        const editor = new toastui.Editor({
+            el: document.querySelector('#editor'),
+            height: '500px',
+            // initialEditType: 'markdown',
+            initialEditType: 'wysiwyg',
+            previewStyle: 'vertical',
+            plugins: [
+                toastui.Editor.plugin.tableMergedCell,
+                [toastui.Editor.plugin.chart, chartOptions],
+                toastui.Editor.plugin.codeSyntaxHighlight,
+                [toastui.Editor.plugin.colorSyntax, colorSyntaxOptions]
+            ]
+        });
+
+        editor.getHtml();
+    })();
+</script>
 
 <!--<script src="initialize.js"></script>-->
