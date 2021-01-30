@@ -1,6 +1,6 @@
 ---
 layout: editor
-title: Editor
+title: Write
 icon: fas fa-edit
 order: 5
 ---
