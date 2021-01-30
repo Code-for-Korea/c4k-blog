@@ -24,28 +24,29 @@ layout: page
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
+<input type="text" class="form-control mb-2" placeholder="Title">
 <div id="editor"></div>
 
 <script>
     (function () {
         const chartOptions = {
-            /*
+/*
              minWidth: 100,
              maxWidth: 600,
              minHeight: 100,
              maxHeight: 300
-             */
+*/
         };
 
         const colorSyntaxOptions = {
-            /* preset: ['#181818', '#292929', '#393939'], */
+            /*preset: ['#181818', '#292929', '#393939'],*/
             useCustomSyntax: true
         };
 
         const editor = new toastui.Editor({
             el: document.querySelector('#editor'),
             height: '500px',
-            /* initialEditType: 'markdown', */
+            /*initialEditType: 'markdown',*/
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
             plugins: [
