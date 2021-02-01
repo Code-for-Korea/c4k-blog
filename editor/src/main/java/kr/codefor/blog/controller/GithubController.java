@@ -25,10 +25,10 @@ public class GithubController {
 
     private final SessionService sessionService;
 
-    @Value("${custom.github.clientid}")
+    @Value("${api.github.clientid}")
     private String client_id;
 
-    @Value("${custom.github.clientSecret}")
+    @Value("${api.github.clientSecret}")
     private String clientSecret;
 
     @PostMapping("/create-test")
