@@ -12,8 +12,8 @@ public class EditorApplication {
                 .properties("" +
                         "spring.config.location=" +
                         "classpath:/application.yml," +
-                        "file:C:/repository/_secrets/c4k-blog.yml," +
-                        "file:/home/ec2-user/_secrets/c4k-blog.yml"
+                        "optional:C:/repository/_secrets/c4k-blog.yml," +
+                        "optional:/home/ec2-user/_secrets/c4k-blog.yml"
                 )
                 .run(args);
     }
