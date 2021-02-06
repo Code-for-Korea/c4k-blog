@@ -27,7 +27,7 @@ public class Swagger2Config{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API 타이틀")
+                .title("Code for Korea Blog Editor API")
                 .description("API 상세소개 및 사용법 등")
                 .version("1.0")
                 .build();
