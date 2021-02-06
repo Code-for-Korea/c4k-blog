@@ -16,7 +16,7 @@ PROJECT_NAME=editor
 
 echo "> Check pid of Running Application"
 
-CURRENT_PID=$(pgrep -f ${PROJECT_NAME}*.jar)
+CURRENT_PID=$(pgrep -f ${PROJECT_NAME})
 echo "> pid: $CURRENT_PID"
 
 if [ -z "$CURRENT_PID" ]; then
