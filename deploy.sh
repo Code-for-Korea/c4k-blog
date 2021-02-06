@@ -10,4 +10,4 @@ jekyll build
 
 
 EDITOR_API_DEPLOY=/home/ec2-user/deploy_blog_api.sh
-/bin/bash EDITOR_API_DEPLOY
+/bin/bash $EDITOR_API_DEPLOY
