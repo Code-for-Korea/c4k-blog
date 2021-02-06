@@ -23,7 +23,7 @@ if [ -z "$CURRENT_PID" ]; then
         echo "> Not Exists"
 else
         echo "> kill -15 $CURRENT_PID"
-        kill -15 $CURRENT_PID
+        sudo kill -15 $CURRENT_PID
         sleep 5
 fi
 
@@ -48,4 +48,4 @@ echo "> JAR Name: $JAR_NAME"
 
 
 sudo nohup java -jar \
-    $EDITOR_REPOSITORY/$JAR_NAME > $EDITOR_REPOSITORY/editor_nohup.out 2>&1 &
+    $EDITOR_REPOSITORY/$JAR_NAME > sudo $EDITOR_REPOSITORY/editor_nohup.out 2>&1 &
