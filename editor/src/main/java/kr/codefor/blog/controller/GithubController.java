@@ -125,7 +125,7 @@ public class GithubController {
             Session one = sessionService.findOne(saveId);
             result.put("session_id", one.getSessionId());
             result.put("refresh_token", one.getRefreshToken());
-            result.put("TEST1", "QQQQ");
+            result.put("TEST1", "FFF");
             return new JSONResponse(HttpStatus.OK, result);
         }
         return new JSONResponse(HttpStatus.BAD_REQUEST, resultMap);
