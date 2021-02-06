@@ -125,7 +125,7 @@ public class GithubController {
             Session one = sessionService.findOne(saveId);
             result.put("session_id", one.getSessionId());
             result.put("refresh_token", one.getRefreshToken());
-            result.put("TEST", "TEST");
+            result.put("TEST1", "TEST1");
             return new JSONResponse(HttpStatus.OK, result);
         }
         return new JSONResponse(HttpStatus.BAD_REQUEST, resultMap);
@@ -159,6 +159,7 @@ public class GithubController {
             HashMap<String, Object> result = new HashMap<>();
             result.put("session_id", one.getSessionId());
             result.put("refresh_token", one.getRefreshToken());
+            result.put("TEST2", "TEST2");
             return new JSONResponse(HttpStatus.OK, result);
         }
         return new JSONResponse(HttpStatus.BAD_REQUEST, resultMap);
