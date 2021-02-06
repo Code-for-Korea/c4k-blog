@@ -46,4 +46,6 @@ JAR_NAME=$(ls -tr $EDITOR_REPOSITORY/ | grep "\.jar$" | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
-sudo nohup java -jar $EDITOR_REPOSITORY/$JAR_NAME 2>&1 &
+
+sudo nohup java -jar \
+    $EDITOR_REPOSITORY/$JAR_NAME > $EDITOR_REPOSITORY/editor_nohup.out 2>&1 &
