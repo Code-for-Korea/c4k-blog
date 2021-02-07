@@ -19,14 +19,9 @@ echo "> Check pid of Running Application"
 CURRENT_PID=$(pgrep -f ${PROJECT_NAME})
 echo "> pid: $CURRENT_PID"
 
-if [ -z "$CURRENT_PID" ]; then
-        echo "> Not Exists"
-else
-        echo "> kill -15 $CURRENT_PID"
-        sudo kill -15 $CURRENT_PID
-        sleep 5
-fi
-
+echo "> kill -15 $CURRENT_PID"
+sudo kill -15 $CURRENT_PID
+sleep 5
 
 echo "> Start Project Build"
 cd $EDITOR_REPOSITORY/$PROJECT_NAME/
