@@ -62,7 +62,7 @@ public class GithubController {
             System.out.println(post.getContent());
             String fileName = post.getTitle()
                     .replaceAll("[^ 가-힣a-zA-Z0-9]", "")
-                    .replaceAll("\s", "-") + generateRandom(5) + ".md";
+                    .replaceAll("\s", "-") + "-" + generateRandom(5) + ".md";
             String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/blog/_posts/" +
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-")) +
                     fileName;
