@@ -43,7 +43,7 @@ public class GithubController {
         Session one = sessionService.findOne(gsession_id);
 
         if (one == null) {
-            result.put("error", "error");
+            result.put("error", true);
         } else {
             System.out.println(post.getTitle());
             System.out.println(post.getContent());
@@ -71,9 +71,7 @@ public class GithubController {
             HttpEntity<Map> requestEntity = new HttpEntity<Map>(responseBody, headers);
             HttpEntity<Map> response = restTemplate.exchange(uri.toString(), HttpMethod.PUT, requestEntity, Map.class, responseBody);
 
-
-            result.put("header", response.getHeaders()); //헤더 정보 확인
-            result.put("body", response.getBody()); //실제 데이터 정보 확인
+            result.put("msg", "success");
         }
         return result;
     }

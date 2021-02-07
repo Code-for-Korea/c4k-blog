@@ -70,7 +70,7 @@ layout: page
 
         editor = new toastui.Editor({
             el: document.querySelector('#editor'),
-            height: '600px',
+            height: '500px',
             /*initialEditType: 'markdown',*/
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
@@ -94,7 +94,12 @@ layout: page
                 if (xhr.readyState === xhr.DONE) {
                     if (xhr.status === 200 || xhr.status === 201) {
                         const json = JSON.parse(xhr.responseText);
-                        console.log(json);
+                        if (json.data.error && json.data.error === true) {
+                            alert("에러발생");
+                            console.error(json);
+                        } else {
+                            location.reload();
+                        }
                     } else {
                         console.error(xhr.responseText);
                     }
