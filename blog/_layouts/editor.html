@@ -24,11 +24,35 @@ layout: page
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
-<input type="text" class="form-control mb-2" placeholder="Title">
-<div id="editor"></div>
+<article class="d-none">
+    <input type="text" class="form-control" placeholder="Title">
+    <div id="editor" class="mt-2 mb-2"></div>
+    <div class="float-right" role="group" aria-label="게시글 에디터 버튼">
+        <input type="button" class="btn btn-outline-secondary" value="취소">
+        <input type="button" class="btn btn-primary" value="작성">
+    </div>
+</article>
 
-<script>
-    (function () {
+<article class="d-none">
+    <a href="https://github.com/login/oauth/authorize?client_id=Iv1.59d98a5dcc950907">
+        <button style="display: block; border: 0px none; border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px; color: rgb(255, 255, 255); cursor: pointer; font-size: 19px; margin: 5px; width: calc(100% - 10px); overflow: hidden; padding: 0px 10px; user-select: none; height: 50px; background: rgb(51, 51, 51) none repeat scroll 0% 0%;">
+            <div style="align-items: center; display: flex; height: 100%;">
+                <div style="display: flex; justify-content: center; min-width: 26px;">
+                    <svg fill="#FFFFFF" role="img" viewBox="0 0 24 24" width="26px" height="26px"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                    </svg>
+                </div>
+                <div style="width: 10px;"></div>
+                <div style="text-align: left; width: 100%;">Login with GitHub</div>
+            </div>
+        </button>
+    </a>
+</article>
+
+
+<script type="text/javascript">
+    function initEditor() {
         const chartOptions = {
             /*
                          minWidth: 100,
@@ -58,10 +82,29 @@ layout: page
         });
 
         editor.getHtml();
-    })();
-</script>
+    }
 
-<script type="text/javascript">
-    const request = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://localhost:8443/api/github/authorize');
+    xhr.withCredentials = true;
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === xhr.DONE) {
+            if (xhr.status === 200 || xhr.status === 201) {
+                const json = JSON.parse(xhr.responseText);
+                const articles = document.getElementsByTagName('article');
+                console.log(json);
+                // 에러가 있으면 OAuth 출력
+                if (json.data.error && json.data.error === true) {
+                    articles[1].className = 'd-block';
+                } else {
+                    initEditor();
+                    articles[0].className = 'd-block';
+                }
+            } else {
+                console.error(xhr.responseText);
+            }
+        }
+    }
 
+    xhr.send(null);
 </script>

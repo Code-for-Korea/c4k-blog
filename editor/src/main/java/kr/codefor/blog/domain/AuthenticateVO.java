@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public class TokenRefreshVO {
+public class AuthenticateVO {
     private String session_id;
     private String refresh_token;
     private String grant_type;

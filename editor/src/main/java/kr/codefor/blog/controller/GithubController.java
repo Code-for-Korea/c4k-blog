@@ -1,6 +1,6 @@
 package kr.codefor.blog.controller;
 
-import kr.codefor.blog.domain.TokenRefreshVO;
+import kr.codefor.blog.domain.AuthenticateVO;
 import kr.codefor.blog.domain.JSONResponse;
 import kr.codefor.blog.domain.Session;
 import kr.codefor.blog.service.SessionService;
@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,13 +97,9 @@ public class GithubController {
         return result;
     }
 
-//    @GetMapping("/authorize")
-//    public Map<String, Object> ValidAuthorize(@RequestParam String sessionId) {
-//
-//    }
-
     @GetMapping("/oauth")
-    public JSONResponse CodeToAccessToken(@RequestParam String code) {
+    public void CodeToAccessToken(HttpServletResponse response, @RequestParam String code)
+            throws IOException {
         RestTemplate restTemplate = new RestTemplate();
 
         String url = "https://github.com/login/oauth/access_token";
@@ -121,30 +121,36 @@ public class GithubController {
                             resultMap.get("refresh_token").toString()
                     )
             );
-            HashMap<String, Object> result = new HashMap<>();
             Session one = sessionService.findOne(saveId);
-            result.put("session_id", one.getSessionId());
-            result.put("refresh_token", one.getRefreshToken());
-            return new JSONResponse(HttpStatus.OK, result);
+
+            Cookie cookieGID = new Cookie("GSESSIONID", one.getSessionId());
+            cookieGID.setMaxAge(28800);
+            cookieGID.setPath("/");
+            response.addCookie(cookieGID);
+
+            Cookie cookieREF = new Cookie("REFRESH_TOKEN", one.getRefreshToken());
+            cookieREF.setMaxAge(15811200);
+            cookieREF.setPath("/");
+            response.addCookie(cookieREF);
         }
-        return new JSONResponse(HttpStatus.BAD_REQUEST, resultMap);
+        response.sendRedirect("http://localhost:4000/tabs/editor");
     }
 
     @PostMapping("/oauth")
-    public JSONResponse RenewingAccessTokenWithRefreshToken(@RequestBody TokenRefreshVO tokenRefreshVO) {
+    public JSONResponse RenewingAccessTokenWithRefreshToken(@RequestBody AuthenticateVO authenticateVO) {
         RestTemplate restTemplate = new RestTemplate();
 
         String url = "https://github.com/login/oauth/access_token";
 
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
 
-        Session one = sessionService.findOne(tokenRefreshVO.getSession_id());
+        Session one = sessionService.findOne(authenticateVO.getSession_id());
 
         MultiValueMap<String, String> responseBody = new LinkedMultiValueMap<String, String>();
         responseBody.add("client_id", client_id);
         responseBody.add("client_secret", clientSecret);
-        responseBody.add("refresh_token", tokenRefreshVO.getRefresh_token());
-        responseBody.add("grant_type", tokenRefreshVO.getGrant_type());
+        responseBody.add("refresh_token", authenticateVO.getRefresh_token());
+        responseBody.add("grant_type", authenticateVO.getGrant_type());
 
         HashMap resultMap = restTemplate.postForObject(uri.toString(), responseBody, HashMap.class);
 
@@ -158,8 +164,25 @@ public class GithubController {
             HashMap<String, Object> result = new HashMap<>();
             result.put("session_id", one.getSessionId());
             result.put("refresh_token", one.getRefreshToken());
-            return new JSONResponse(HttpStatus.OK, result);
+            return new JSONResponse(result);
         }
-        return new JSONResponse(HttpStatus.BAD_REQUEST, resultMap);
+        return new JSONResponse(resultMap);
+    }
+
+    @PostMapping("/authorize")
+    public JSONResponse AuthenticateSession(
+            @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
+            @CookieValue(value = "REFRESH_TOKEN", required = false) String ref_token
+    ) {
+        System.out.println(gsession_id);
+        System.out.println(ref_token);
+        HashMap<String, Object> result = new HashMap<>();
+
+        if (gsession_id == null) {
+            result.put("error", true);
+        } else {
+            result.put("gsession_id", gsession_id);
+        }
+        return new JSONResponse(result);
     }
 }
