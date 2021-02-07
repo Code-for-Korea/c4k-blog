@@ -93,7 +93,7 @@ layout: page
                 const json = JSON.parse(xhr.responseText);
                 const articles = document.getElementsByTagName('article');
                 console.log(json);
-                // 에러가 있으면 OAuth 출력
+                /*에러가 있으면 OAuth 출력*/
                 if (json.data.error && json.data.error === true) {
                     articles[1].className = 'd-block';
                 } else {
