@@ -35,7 +35,7 @@ public class PostVO {
                 content;
 
         Base64.Encoder encoder = Base64.getEncoder();
-        byte[] encodedBytes = encoder.encode(msg.getBytes(StandardCharsets.UTF_8));
+        byte[] encodedBytes = encoder.encode(msg.getBytes());
         this.content = new String(encodedBytes);
     }
 }
