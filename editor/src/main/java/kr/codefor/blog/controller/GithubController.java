@@ -85,6 +85,7 @@ public class GithubController {
             HttpEntity<Map> response = restTemplate.exchange(uri.toString(), HttpMethod.PUT, requestEntity, Map.class, responseBody);
 
             result.put("msg", "success");
+            result.put("ret", response.getBody());
         }
         return new JSONResponse(result);
     }
