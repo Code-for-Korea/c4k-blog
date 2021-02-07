@@ -34,9 +34,6 @@ public class GithubController {
     @Value("${api.github.clientSecret}")
     private String clientSecret;
 
-    @Value("${environment.launch-mode}")
-    private String launchMode;
-
     @PostMapping("/create-test")
     public Map<String, Object> CreateNewPost(@RequestBody CreatePostDTO createPostDTO) {
         HashMap<String, Object> result = new HashMap<String, Object>();
@@ -146,11 +143,7 @@ public class GithubController {
             cookieREF.setPath("/");
             response.addCookie(cookieREF);
         }
-        if (launchMode.equals("dev")) {
-            response.sendRedirect("http://localhost:4000/tabs/editor");
-        } else if (launchMode.equals("production")) {
-            response.sendRedirect("https://blog.codefor.kr/tabs/editor");
-        }
+        response.sendRedirect("https://blog.codefor.kr/tabs/editor");
     }
 
     @PostMapping("/oauth")
