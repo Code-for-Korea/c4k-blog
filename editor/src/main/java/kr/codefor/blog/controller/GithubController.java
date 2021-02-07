@@ -9,6 +9,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -219,9 +220,21 @@ public class GithubController {
                 headers.set("Authorization", "token " + one.getAccessToken());
 
                 HttpEntity<Map> requestEntity = new HttpEntity<Map>(headers);
-                HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
 
-                result.put("ret", responseEntity.getBody());
+                try {
+                    HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
+                    result.put("ret", responseEntity.getBody());
+                } catch (HttpClientErrorException e) {
+                    Cookie cookieGID = new Cookie("GSESSIONID", null);
+                    cookieGID.setMaxAge(0);
+                    cookieGID.setPath("/");
+                    response.addCookie(cookieGID);
+
+                    Cookie cookieREF = new Cookie("REFRESH_TOKEN", null);
+                    cookieREF.setMaxAge(0);
+                    cookieREF.setPath("/");
+                    response.addCookie(cookieREF);
+                }
             } else {
                 result.put("error", true);
                 Cookie cookieGID = new Cookie("GSESSIONID", null);
