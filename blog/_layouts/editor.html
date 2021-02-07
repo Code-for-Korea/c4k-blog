@@ -27,7 +27,8 @@ layout: page
 <article class="d-none">
     <input type="text" class="form-control" placeholder="Title" id="title">
     <div id="editor" class="mt-2 mb-2"></div>
-    <div class="float-right" role="group" aria-label="게시글 에디터 버튼">
+    <div class="d-flex justify-content-between" role="group" aria-label="게시글 에디터 버튼">
+        <input type="button" class="btn btn-outline-secondary" value="로그아웃" id="btn-logout">
         <input type="button" class="btn btn-primary" value="작성" id="btn-write">
     </div>
 </article>
@@ -116,6 +117,13 @@ layout: page
                 ],
                 "title": document.getElementById('title').value
             }));
+        });
+
+        document.getElementById('btn-logout').addEventListener('click', ()=>{
+           document.cookie = 'GSESSIONID=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+           document.cookie = 'REFRESH_TOKEN=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+           location.reload();
+           console.log(document.cookie);
         });
     }
 
