@@ -195,6 +195,7 @@ public class GithubController {
 
     @PostMapping("/authorize")
     public JSONResponse AuthenticateSession(
+            HttpServletResponse response,
             @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
             @CookieValue(value = "REFRESH_TOKEN", required = false) String ref_token
     ) {
@@ -205,7 +206,34 @@ public class GithubController {
         if (gsession_id == null) {
             result.put("error", true);
         } else {
-            result.put("gsession_id", gsession_id);
+            RestTemplate restTemplate = new RestTemplate();
+
+            Session one = sessionService.findOne(gsession_id);
+            if(one.getRefreshToken().equals(ref_token)) {
+                String url = "https://api.github.com/user";
+
+                UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.set("Authorization", "token " + one.getAccessToken());
+
+                HttpEntity<Map> requestEntity = new HttpEntity<Map>(headers);
+                HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
+
+                result.put("ret", responseEntity.getBody());
+            } else {
+                result.put("error", true);
+                Cookie cookieGID = new Cookie("GSESSIONID", "");
+                cookieGID.setMaxAge(0);
+                cookieGID.setPath("/");
+                response.addCookie(cookieGID);
+
+                Cookie cookieREF = new Cookie("REFRESH_TOKEN", "");
+                cookieREF.setMaxAge(0);
+                cookieREF.setPath("/");
+                response.addCookie(cookieREF);
+            }
         }
         return new JSONResponse(result);
     }
