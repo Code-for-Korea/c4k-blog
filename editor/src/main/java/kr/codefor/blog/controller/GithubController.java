@@ -225,6 +225,7 @@ public class GithubController {
                     HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
                     result.put("ret", responseEntity.getBody());
                 } catch (HttpClientErrorException e) {
+                    result.put("error", true);
                     Cookie cookieGID = new Cookie("GSESSIONID", null);
                     cookieGID.setMaxAge(0);
                     cookieGID.setPath("/");
