@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,6 +34,18 @@ public class GithubController {
 
     @Value("${api.github.clientSecret}")
     private String clientSecret;
+
+    private String generateRandom(int targetStringLength) {
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+    }
 
     @PostMapping("/post")
     public JSONResponse CreateNewPost(
@@ -48,8 +61,8 @@ public class GithubController {
             System.out.println(post.getTitle());
             System.out.println(post.getContent());
             String fileName = post.getTitle()
-                    .replaceAll("[^ ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "")
-                    .replaceAll("\s", "-") + ".md";
+                    .replaceAll("[^ 가-힣a-zA-Z0-9]", "")
+                    .replaceAll("\s", "-") + generateRandom(5) + ".md";
             String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/blog/_posts/" +
                     LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-")) +
                     fileName;
