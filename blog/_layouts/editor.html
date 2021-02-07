@@ -85,7 +85,7 @@ layout: page
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://localhost:8443/api/github/authorize');
+    xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
     xhr.withCredentials = true;
     xhr.onreadystatechange = () => {
         if (xhr.readyState === xhr.DONE) {
