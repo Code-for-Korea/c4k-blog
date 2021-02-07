@@ -25,7 +25,7 @@ layout: page
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
 <article class="d-none">
-    <input type="text" class="form-control" placeholder="Title">
+    <input type="text" class="form-control" placeholder="Title" id="title">
     <div id="editor" class="mt-2 mb-2"></div>
     <div class="float-right" role="group" aria-label="게시글 에디터 버튼">
         <input type="button" class="btn btn-primary" value="작성" id="btn-write">
@@ -52,6 +52,7 @@ layout: page
 
 <script type="text/javascript">
     let editor = null;
+
     function initEditor() {
         const chartOptions = {
             /*
@@ -82,26 +83,35 @@ layout: page
         });
     }
 
-    initEditor();
-    document.getElementsByTagName('article')[0].className = 'd-block';
-
-    const btn_write = document.getElementById('btn-write');
-    btn_write.addEventListener('click', ()=> {
-       console.log(editor.getMarkdown());
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://codefor.kr:8443/api/github/post');
-        xhr.withCredentials = true;
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === xhr.DONE) {
-                if (xhr.status === 200 || xhr.status === 201) {
-                    const json = JSON.parse(xhr.responseText);
-                    console.log(json);
-                } else {
-                    console.error(xhr.responseText);
+    function initElements() {
+        document.getElementById('btn-write').addEventListener('click', () => {
+            console.log(editor.getMarkdown());
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://codefor.kr:8443/api/github/post');
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200 || xhr.status === 201) {
+                        const json = JSON.parse(xhr.responseText);
+                        console.log(json);
+                    } else {
+                        console.error(xhr.responseText);
+                    }
                 }
-            }
-        };
-    });
+            };
+            xhr.send(JSON.stringify({
+                "author": "author",
+                "categories": [
+                    "A", "B"
+                ],
+                "content": editor.getMarkdown(),
+                "tags": [
+                    "태그1", "태그2", "태그3"
+                ],
+                "title": document.getElementById('title').value
+            }));
+        });
+    }
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
@@ -116,6 +126,7 @@ layout: page
                     articles[1].className = 'd-block';
                 } else {
                     initEditor();
+                    initElements();
                     articles[0].className = 'd-block';
                 }
             } else {
