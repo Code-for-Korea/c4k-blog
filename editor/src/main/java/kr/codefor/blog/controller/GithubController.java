@@ -35,7 +35,7 @@ public class GithubController {
     private String clientSecret;
 
     @PostMapping("/post")
-    public Map<String, Object> CreateNewPost(
+    public JSONResponse CreateNewPost(
             @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
             @RequestBody PostVO post) {
         HashMap<String, Object> result = new HashMap<String, Object>();
@@ -73,7 +73,7 @@ public class GithubController {
 
             result.put("msg", "success");
         }
-        return result;
+        return new JSONResponse(result);
     }
 
     @PostMapping("/delete-test")
