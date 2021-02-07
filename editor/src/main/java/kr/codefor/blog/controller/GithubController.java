@@ -1,14 +1,11 @@
 package kr.codefor.blog.controller;
 
-import kr.codefor.blog.domain.AuthenticateVO;
-import kr.codefor.blog.domain.JSONResponse;
-import kr.codefor.blog.domain.Session;
+import kr.codefor.blog.domain.*;
 import kr.codefor.blog.service.SessionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,11 +35,22 @@ public class GithubController {
     private String clientSecret;
 
     @PostMapping("/create-test")
-    public Map<String, Object> PutTest() {
+    public Map<String, Object> CreateNewPost(@RequestBody CreatePostDTO createPostDTO) {
         HashMap<String, Object> result = new HashMap<String, Object>();
 
+        PostVO post = createPostDTO.getPost();
+        AuthenticateVO authenticate = createPostDTO.getAuthenticate();
 
-        String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/test2.txt";
+        Session one = sessionService.findOne(authenticate.getSession_id());
+
+        System.out.println(post.getTitle());
+        System.out.println(post.getContent());
+        String fileName = post.getTitle()
+                .replaceAll("[^ ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "")
+                .replaceAll("\s", "-") + ".md";
+        String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/blog/_posts/" +
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-")) +
+                fileName;
 
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
 
@@ -50,11 +60,11 @@ public class GithubController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("accept", "application/vnd.github.v3+json");
-        headers.set("Authorization", "token c8b0c1ea13e9e4e2c667586fc698f8cf41b412e1");
+        headers.set("Authorization", "token " + one.getAccessToken());
 
         Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "TEST");
-        responseBody.put("content", "dGVzdDENCnRlc3QyDQp0ZXN0Mw==");
+        responseBody.put("message", "[NEW] " + post.getAuthor() + " - " + fileName);
+        responseBody.put("content", post.getContent());
 
         HttpEntity<Map> requestEntity = new HttpEntity<Map>(responseBody, headers);
         HttpEntity<Map> response = restTemplate.exchange(uri.toString(), HttpMethod.PUT, requestEntity, Map.class, responseBody);
