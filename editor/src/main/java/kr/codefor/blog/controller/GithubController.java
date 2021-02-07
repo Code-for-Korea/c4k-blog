@@ -224,12 +224,12 @@ public class GithubController {
                 result.put("ret", responseEntity.getBody());
             } else {
                 result.put("error", true);
-                Cookie cookieGID = new Cookie("GSESSIONID", "");
+                Cookie cookieGID = new Cookie("GSESSIONID", null);
                 cookieGID.setMaxAge(0);
                 cookieGID.setPath("/");
                 response.addCookie(cookieGID);
 
-                Cookie cookieREF = new Cookie("REFRESH_TOKEN", "");
+                Cookie cookieREF = new Cookie("REFRESH_TOKEN", null);
                 cookieREF.setMaxAge(0);
                 cookieREF.setPath("/");
                 response.addCookie(cookieREF);
