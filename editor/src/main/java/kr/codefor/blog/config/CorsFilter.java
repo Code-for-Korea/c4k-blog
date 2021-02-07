@@ -1,5 +1,6 @@
 package kr.codefor.blog.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
@@ -19,12 +20,20 @@ public class CorsFilter implements Filter {
 
     }
 
+    @Value("${environment.launch-mode}")
+    private String launchMode;
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
+        if (launchMode.equals("dev")) {
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
+        } else if (launchMode.equals("production")) {
+            response.setHeader("Access-Control-Allow-Origin", "https://blog.codefor.kr");
+        }
+
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
 //        response.setHeader("Access-Control-Allow-Headers", "Cookie, X-Requested-With, X-Auth-Token");
