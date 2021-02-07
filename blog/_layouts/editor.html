@@ -28,8 +28,7 @@ layout: page
     <input type="text" class="form-control" placeholder="Title">
     <div id="editor" class="mt-2 mb-2"></div>
     <div class="float-right" role="group" aria-label="게시글 에디터 버튼">
-        <input type="button" class="btn btn-outline-secondary" value="취소">
-        <input type="button" class="btn btn-primary" value="작성">
+        <input type="button" class="btn btn-primary" value="작성" id="btn-write">
     </div>
 </article>
 
@@ -52,6 +51,7 @@ layout: page
 
 
 <script type="text/javascript">
+    let editor = null;
     function initEditor() {
         const chartOptions = {
             /*
@@ -67,9 +67,9 @@ layout: page
             useCustomSyntax: true
         };
 
-        const editor = new toastui.Editor({
+        editor = new toastui.Editor({
             el: document.querySelector('#editor'),
-            /*height: '500px',*/
+            height: '600px',
             /*initialEditType: 'markdown',*/
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
@@ -80,9 +80,28 @@ layout: page
                 [toastui.Editor.plugin.colorSyntax, colorSyntaxOptions]
             ]
         });
-
-        editor.getHtml();
     }
+
+    initEditor();
+    document.getElementsByTagName('article')[0].className = 'd-block';
+
+    const btn_write = document.getElementById('btn-write');
+    btn_write.addEventListener('click', ()=> {
+       console.log(editor.getMarkdown());
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://codefor.kr:8443/api/github/post');
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    const json = JSON.parse(xhr.responseText);
+                    console.log(json);
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+    });
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
@@ -92,7 +111,6 @@ layout: page
             if (xhr.status === 200 || xhr.status === 201) {
                 const json = JSON.parse(xhr.responseText);
                 const articles = document.getElementsByTagName('article');
-                console.log(json);
                 /*에러가 있으면 OAuth 출력*/
                 if (json.data.error && json.data.error === true) {
                     articles[1].className = 'd-block';

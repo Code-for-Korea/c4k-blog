@@ -34,45 +34,47 @@ public class GithubController {
     @Value("${api.github.clientSecret}")
     private String clientSecret;
 
-    @PostMapping("/create-test")
-    public Map<String, Object> CreateNewPost(@RequestBody CreatePostDTO createPostDTO) {
+    @PostMapping("/post")
+    public Map<String, Object> CreateNewPost(
+            @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
+            @RequestBody PostVO post) {
         HashMap<String, Object> result = new HashMap<String, Object>();
 
-        PostVO post = createPostDTO.getPost();
-        AuthenticateVO authenticate = createPostDTO.getAuthenticate();
+        Session one = sessionService.findOne(gsession_id);
 
-        Session one = sessionService.findOne(authenticate.getSession_id());
+        if (one == null) {
+            result.put("error", "error");
+        } else {
+            System.out.println(post.getTitle());
+            System.out.println(post.getContent());
+            String fileName = post.getTitle()
+                    .replaceAll("[^ ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "")
+                    .replaceAll("\s", "-") + ".md";
+            String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/blog/_posts/" +
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-")) +
+                    fileName;
 
-        System.out.println(post.getTitle());
-        System.out.println(post.getContent());
-        String fileName = post.getTitle()
-                .replaceAll("[^ ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]", "")
-                .replaceAll("\s", "-") + ".md";
-        String url = "https://api.github.com/repos/Code-for-Korea/c4k-blog/contents/blog/_posts/" +
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-")) +
-                fileName;
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
 
-        UriComponents uri = UriComponentsBuilder.fromHttpUrl(url).build();
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.set("accept", "application/vnd.github.v3+json");
+            headers.set("Authorization", "token " + one.getAccessToken());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("accept", "application/vnd.github.v3+json");
-        headers.set("Authorization", "token " + one.getAccessToken());
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("message", "[NEW] " + post.getAuthor() + " - " + fileName);
+            responseBody.put("content", post.getContent());
 
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "[NEW] " + post.getAuthor() + " - " + fileName);
-        responseBody.put("content", post.getContent());
-
-        HttpEntity<Map> requestEntity = new HttpEntity<Map>(responseBody, headers);
-        HttpEntity<Map> response = restTemplate.exchange(uri.toString(), HttpMethod.PUT, requestEntity, Map.class, responseBody);
+            HttpEntity<Map> requestEntity = new HttpEntity<Map>(responseBody, headers);
+            HttpEntity<Map> response = restTemplate.exchange(uri.toString(), HttpMethod.PUT, requestEntity, Map.class, responseBody);
 
 
-        result.put("header", response.getHeaders()); //헤더 정보 확인
-        result.put("body", response.getBody()); //실제 데이터 정보 확인
-
+            result.put("header", response.getHeaders()); //헤더 정보 확인
+            result.put("body", response.getBody()); //실제 데이터 정보 확인
+        }
         return result;
     }
 
