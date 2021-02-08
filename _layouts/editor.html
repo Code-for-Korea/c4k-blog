@@ -31,9 +31,9 @@ layout: page
             <label class="input-group-text" for="categories_1st"><i class="fas fa-list"></i></label>
         </div>
         <select class="custom-select" id="categories_1st">
-            <option selected>공공데이터</option>
-            <option>시빅해킹</option>
-            <option>프로젝트</option>
+            <option value="공공데이터" selected>공공데이터</option>
+            <option value="시빅해킹">시빅해킹</option>
+            <option value="프로젝트">프로젝트</option>
         </select>
         <select class="custom-select" id="categories_2st">
         </select>
@@ -207,7 +207,7 @@ layout: page
         console.log(category_1st);
 
         $(categories[category_1st]).each(function (index, item) {
-            const option = $("<option>" + item + "</option>");
+            const option = $(`<option value='${item}'>${item}</option>`);
             $('categories_2st').append(option);
         });
     }
