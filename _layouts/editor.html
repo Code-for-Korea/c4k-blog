@@ -31,16 +31,11 @@ layout: page
             <label class="input-group-text" for="categories_1st"><i class="fas fa-list"></i></label>
         </div>
         <select class="custom-select" id="categories_1st">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+            <option selected>공공데이터</option>
+            <option>시빅해킹</option>
+            <option>프로젝트</option>
         </select>
         <select class="custom-select" id="categories_2st">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
         </select>
     </div>
 
@@ -192,6 +187,26 @@ layout: page
                 }
             };
             xhr.send(null);
+        });
+
+        document.getElementById('categories_1st').addEventListener('onchange', category_change);
+        category_change();
+    }
+
+    function category_change() {
+        const categories = {
+            '공공데이터': ['일반'],
+            '시빅해킹': ['일반'],
+            '프로젝트': ['일반', 'Meet & Hack']
+        };
+
+        const category_1st = $('categories_1st').val();
+
+        $('categories_2st').empty();
+
+        $(categories[category_1st]).each(function (index, item) {
+            const option = $("<option>" + item + "</option>");
+            $('categories_2st').append(option);
         });
     }
 
