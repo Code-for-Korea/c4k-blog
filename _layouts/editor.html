@@ -205,7 +205,8 @@ layout: page
         $('#categories_2st').empty();
 
         $(categories[category_1st]).each(function (index, item) {
-            const option = $('<option>' + item + '</option>');
+            const option = $(document.createElement('option'));
+            option.text(item);
             console.log(option);
             $('#categories_2st').append(option);
         });
