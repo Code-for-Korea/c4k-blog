@@ -64,7 +64,7 @@ public class GithubController {
     public JSONResponse CreateNewPost(
             @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
             @RequestBody PostVO post) {
-        HashMap<String, Object> result = new HashMap<String, Object>();
+        HashMap<String, Object> result = new HashMap<>();
 
         Session one = sessionService.findOne(gsession_id);
 
