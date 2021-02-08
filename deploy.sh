@@ -5,4 +5,4 @@ cd BLOG_REPOSITORY
 
 sudo docker run \
 -v $PWD/:/srv/jekyll -v $PWD/_site:/srv/jekyll/_site \
-jekyll/builder:latest jekyll build
+jekyll/builder:latest jekyll build 2>&1
