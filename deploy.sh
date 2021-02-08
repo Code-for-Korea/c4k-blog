@@ -3,5 +3,6 @@
 BLOG_REPOSITORY=/home/ec2-user/c4k-blog/front
 cd BLOG_REPOSITORY
 
-sudo docker run --volume="$PWD:/srv/jekyll" jekyll/jekyll jekyll build
-
+sudo docker run \
+-v $PWD/:/srv/jekyll -v $PWD/_site:/srv/jekyll/_site \
+jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build"
