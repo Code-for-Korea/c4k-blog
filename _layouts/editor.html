@@ -204,6 +204,8 @@ layout: page
 
         $('categories_2st').empty();
 
+        console.log(category_1st);
+
         $(categories[category_1st]).each(function (index, item) {
             const option = $("<option>" + item + "</option>");
             $('categories_2st').append(option);
