@@ -195,7 +195,7 @@ layout: page
                     document.getElementById('author').value = profile.id;
                 }
             } else {
-                console.error(xhr.responseText);
+                console.error(JSON.parse(xhr.responseText));
             }
         }
     };
