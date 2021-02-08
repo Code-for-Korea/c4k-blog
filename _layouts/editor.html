@@ -112,44 +112,68 @@ layout: page
         });
     }
 
-    function initElements() {
-        document.getElementById('btn-write').addEventListener('click', () => {
-            console.log(editor.getMarkdown());
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'https://codefor.kr:8443/api/github/post');
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.withCredentials = true;
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === xhr.DONE) {
-                    if (xhr.status === 200 || xhr.status === 201) {
-                        const json = JSON.parse(xhr.responseText);
-                        if (json.data.error && json.data.error === true) {
+    function renewing_access_token_with_refresh_token() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://codefor.kr:8443/api/github/oauth');
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    const json = JSON.parse(xhr.responseText);
+                    if (json.data.error && json.data.error === true) {
+                        alert("에러발생");
+                        console.error(json);
+                    } else {
+                        create_new_post();
+                    }
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.send(null);
+    }
+
+    function create_new_post() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://codefor.kr:8443/api/github/post');
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    const json = JSON.parse(xhr.responseText);
+                    if (json.data.error && json.data.error === true) {
+                        if (json.data.status === 401) {
+                            renewing_access_token_with_refresh_token();
+                        } else {
                             alert("에러발생");
                             console.error(json);
-                        } else {
-                            location.reload();
                         }
                     } else {
-                        console.error(xhr.responseText);
+                        location.reload();
                     }
+                } else {
+                    console.error(xhr.responseText);
                 }
-            };
-            console.log([
+            }
+        };
+
+        xhr.send(JSON.stringify({
+            "author": document.getElementById('author').value,
+            "categories": [
                 document.getElementById('categories_1st').value,
                 document.getElementById('categories_2st').value
-            ]);
-            console.log(document.getElementById('tags').value.split(','));
-            xhr.send(JSON.stringify({
-                "author": document.getElementById('author').value,
-                "categories": [
-                    document.getElementById('categories_1st').value,
-                    document.getElementById('categories_2st').value
-                ],
-                "content": editor.getMarkdown(),
-                "tags": document.getElementById('tags').value.split(','),
-                "title": document.getElementById('title').value
-            }));
-        });
+            ],
+            "content": editor.getMarkdown(),
+            "tags": document.getElementById('tags').value.split(','),
+            "title": document.getElementById('title').value
+        }));
+    }
+
+    function initElements() {
+        document.getElementById('btn-write').addEventListener('click', create_new_post);
 
         document.getElementById('btn-logout').addEventListener('click', () => {
             const xhr = new XMLHttpRequest();
