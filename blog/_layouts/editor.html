@@ -119,11 +119,22 @@ layout: page
             }));
         });
 
-        document.getElementById('btn-logout').addEventListener('click', ()=>{
-         /*  document.cookie = 'GSESSIONID=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
-           document.cookie = 'REFRESH_TOKEN=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
-           location.reload();
-           console.log(document.cookie);*/
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', 'https://codefor.kr:8443/api/github/authorize');
+            xhr.withCredentials = true;
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === xhr.DONE) {
+                    if (xhr.status === 200 || xhr.status === 201) {
+                        const json = JSON.parse(xhr.responseText);
+                        console.log(json);
+                        location.reload();
+                    } else {
+                        console.error(xhr.responseText);
+                    }
+                }
+            };
+            xhr.send(null);
         });
     }
 

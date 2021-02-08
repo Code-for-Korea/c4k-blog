@@ -48,6 +48,18 @@ public class GithubController {
                 .toString();
     }
 
+    private void clearCookies(HttpServletResponse response) {
+        Cookie cookieGID = new Cookie("GSESSIONID", null);
+        cookieGID.setMaxAge(0);
+        cookieGID.setPath("/");
+        response.addCookie(cookieGID);
+
+        Cookie cookieREF = new Cookie("REFRESH_TOKEN", null);
+        cookieREF.setMaxAge(0);
+        cookieREF.setPath("/");
+        response.addCookie(cookieREF);
+    }
+
     @PostMapping("/post")
     public JSONResponse CreateNewPost(
             @CookieValue(value = "GSESSIONID", required = false) String gsession_id,
@@ -223,32 +235,23 @@ public class GithubController {
 
                 try {
                     HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
-                    result.put("ret", responseEntity.getBody());
+                    result.put("msg", responseEntity.getBody());
                 } catch (HttpClientErrorException e) {
                     result.put("error", true);
-                    Cookie cookieGID = new Cookie("GSESSIONID", null);
-                    cookieGID.setMaxAge(0);
-                    cookieGID.setPath("/");
-                    response.addCookie(cookieGID);
-
-                    Cookie cookieREF = new Cookie("REFRESH_TOKEN", null);
-                    cookieREF.setMaxAge(0);
-                    cookieREF.setPath("/");
-                    response.addCookie(cookieREF);
+                    clearCookies(response);
                 }
             } else {
                 result.put("error", true);
-                Cookie cookieGID = new Cookie("GSESSIONID", null);
-                cookieGID.setMaxAge(0);
-                cookieGID.setPath("/");
-                response.addCookie(cookieGID);
-
-                Cookie cookieREF = new Cookie("REFRESH_TOKEN", null);
-                cookieREF.setMaxAge(0);
-                cookieREF.setPath("/");
-                response.addCookie(cookieREF);
+                clearCookies(response);
             }
         }
+        return new JSONResponse(result);
+    }
+    @DeleteMapping("/authorize")
+    public JSONResponse DeAuthenticateSession(HttpServletResponse response) {
+        clearCookies(response);
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("msg","브라우저에 저장된 인증 정보가 삭제되었습니다.");
         return new JSONResponse(result);
     }
 }
