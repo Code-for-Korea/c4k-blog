@@ -235,7 +235,7 @@ public class GithubController {
 
                 try {
                     HttpEntity<Map> responseEntity = restTemplate.exchange(uri.toString(), HttpMethod.GET, requestEntity, Map.class);
-                    result.put("msg", responseEntity.getBody());
+                    result.put("profile", responseEntity.getBody());
                 } catch (HttpClientErrorException e) {
                     result.put("error", true);
                     clearCookies(response);
