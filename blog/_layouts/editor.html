@@ -25,17 +25,17 @@ layout: page
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
 <article class="d-none">
-    <div class="input-group mb-2">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+    <div class="d-flex flex-column flex-lg-row mb-2">
+        <div class="input-group mr-2 mb-2 mb-lg-0">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+            </div>
+            <input id="author" type="text" class="form-control" placeholder="Author" aria-label="Author"
+                   aria-describedby="basic-addon1" disabled>
         </div>
-        <input id="author" type="text" class="form-control" placeholder="Author" aria-label="Author"
-               aria-describedby="basic-addon1">
-    </div>
-    <div class="d-flex flex-row justify-content-between mb-2">
         <div class="input-group">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="categories_1st">카테고리</label>
+                <label class="input-group-text" for="categories_1st"><i class="fas fa-list"></i></label>
             </div>
             <select class="custom-select" id="categories_1st">
                 <option selected>Choose...</option>
@@ -52,7 +52,16 @@ layout: page
         </div>
     </div>
 
+    <div class="input-group mb-2">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2"><i class="fas fa-tags"></i></span>
+        </div>
+        <input id="tags" type="text" class="form-control" placeholder="Tags" aria-label="Tags"
+               aria-describedby="basic-addon2">
+    </div>
+
     <input type="text" class="form-control" placeholder="Title" id="title">
+
     <div id="editor" class="mt-2 mb-2"></div>
     <div class="d-flex justify-content-between" role="group" aria-label="게시글 에디터 버튼">
         <input type="button" class="btn btn-outline-secondary" value="로그아웃" id="btn-logout">
@@ -98,7 +107,7 @@ layout: page
 
         editor = new toastui.Editor({
             el: document.querySelector('#editor'),
-            height: '500px',
+            height: '50vh',
             /*initialEditType: 'markdown',*/
             initialEditType: 'wysiwyg',
             previewStyle: 'vertical',
@@ -133,15 +142,20 @@ layout: page
                     }
                 }
             };
+            console.log([
+                document.getElementById('categories_1st').value,
+                document.getElementById('categories_2st').value
+            ]);
+            console.log(document.getElementById('tags').value.split(','));
             xhr.send(JSON.stringify({
                 "author": document.getElementById('author').value,
                 "categories": [
-                    "A", "B"
+                    document.getElementById('categories_1st').value,
+                    document.getElementById('categories_2st').value
                 ],
                 "content": editor.getMarkdown(),
-                "tags": [
-                    "태그1", "태그2", "태그3"
-                ],
+                "tags": document.getElementById('tags').value.split(',')
+                ,
                 "title": document.getElementById('title').value
             }));
         });
@@ -165,9 +179,9 @@ layout: page
         });
     }
 
-    initEditor();
-    initElements();
-    document.getElementsByTagName('article')[0].className = 'd-block';
+        initEditor();
+        initElements();
+        document.getElementsByTagName('article')[0].className = 'd-block';
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
