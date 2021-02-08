@@ -222,7 +222,7 @@ layout: page
                         profile.name === ""
                             ? profile.login
                             : profile.name + '(' + profile.login + ')';
-                    document.getElementById('login_user').innerText = 'login with ' + user;
+                    document.getElementById('login_user').innerText = 'logged in ' + user;
                 }
             } else {
                 console.error(JSON.parse(xhr.responseText));
