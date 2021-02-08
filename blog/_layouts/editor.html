@@ -191,7 +191,8 @@ layout: page
     xhr.onreadystatechange = () => {
         if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200 || xhr.status === 201) {
-                const profile = JSON.parse(xhr.responseText).data.profile;
+                const json = JSON.parse(xhr.responseText);
+                const profile = json.data.profile;
                 const articles = document.getElementsByTagName('article');
                 /*에러가 있으면 OAuth 출력*/
                 if (json.data.error && json.data.error === true) {
