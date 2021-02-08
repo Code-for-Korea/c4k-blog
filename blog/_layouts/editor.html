@@ -145,6 +145,7 @@ layout: page
         if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200 || xhr.status === 201) {
                 const json = JSON.parse(xhr.responseText);
+                console.log(json);
                 const articles = document.getElementsByTagName('article');
                 /*에러가 있으면 OAuth 출력*/
                 if (json.data.error && json.data.error === true) {
