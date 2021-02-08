@@ -10,10 +10,6 @@ jobs:
     name: Build, Deploy to AWS EC2 Instance
     runs-on: [ubuntu-latest]
 
-    strategy:
-      matrix:
-        node-version: [12.16.x]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
