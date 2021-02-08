@@ -146,8 +146,7 @@ layout: page
                     document.getElementById('categories_2st').value
                 ],
                 "content": editor.getMarkdown(),
-                "tags": document.getElementById('tags').value.split(',')
-                ,
+                "tags": document.getElementById('tags').value.split(','),
                 "title": document.getElementById('title').value
             }));
         });
@@ -171,11 +170,11 @@ layout: page
         });
     }
 
-/*
-    initEditor();
-    initElements();
-    document.getElementsByTagName('article')[0].className = 'd-block';
-*/
+    /*
+        initEditor();
+        initElements();
+        document.getElementsByTagName('article')[0].className = 'd-block';
+    */
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
