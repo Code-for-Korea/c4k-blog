@@ -3,5 +3,5 @@
 BLOG_REPOSITORY=/home/ec2-user/c4k-blog-front
 cd BLOG_REPOSITORY
 
-sudo docker run --name blog --volume="$PWD:/srv/jekyll" jekyll/jekyll jekyll build
+sudo docker run --volume="$PWD:/srv/jekyll" jekyll/jekyll jekyll build
 
