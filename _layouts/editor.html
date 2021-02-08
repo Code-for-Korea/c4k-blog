@@ -32,6 +32,7 @@ layout: page
         </div>
         <select class="custom-select" id="categories_1st">
             <option selected>일반</option>
+            <option>행사</option>
             <option>공공데이터</option>
             <option>시빅해킹</option>
             <option>프로젝트</option>
@@ -196,7 +197,8 @@ layout: page
 
     function category_change() {
         const categories = {
-            '일반': ['일반'],
+            '일반': ['잡담'],
+            '행사': ['일반'],
             '공공데이터': ['일반'],
             '시빅해킹': ['일반'],
             '프로젝트': ['Meet & Hack', '개인 안심번호']
