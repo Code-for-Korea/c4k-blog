@@ -240,11 +240,11 @@ layout: page
                 } else {
                     const profile = json.data.profile;
 
-                    user_profile['id'] = profile.id;
-                    user_profile['login'] = profile.login;
-                    user_profile['name'] = profile.name;
-                    user_profile['avatar_url'] = profile.avatar_url;
-                    user_profile['bio'] = profile.bio;
+                    user_profile['id'] = profile.id ? profile.id : '';
+                    user_profile['login'] = profile.login ? profile.login : '';
+                    user_profile['name'] = profile.name ? profile.name : '';
+                    user_profile['avatar_url'] = profile.avatar_url ? profile.avatar_url : '';
+                    user_profile['bio'] = profile.bio ? profile.bio : '';
                     initEditor();
                     initElements();
                     articles[0].className = 'd-block';
