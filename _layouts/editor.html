@@ -195,9 +195,9 @@ layout: page
 
         $('#categories_1st').empty();
 
-        $(categories).each(function (index, item) {
+        $(Object.entries(categories)).each(function (index, item) {
             const option = $(document.createElement('option'));
-            option.text(item);
+            option.text(item[0]);
             $('#categories_1st').append(option);
         });
         $('#categories_1st > option').first().on('selected', true);
