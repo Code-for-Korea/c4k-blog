@@ -31,11 +31,6 @@ layout: page
             <label class="input-group-text" for="categories_1st"><i class="fas fa-list"></i></label>
         </div>
         <select class="custom-select" id="categories_1st">
-            <option selected>일반</option>
-            <option>행사</option>
-            <option>공공데이터</option>
-            <option>시빅해킹</option>
-            <option>프로젝트</option>
         </select>
         <select class="custom-select" id="categories_2st">
         </select>
@@ -79,6 +74,13 @@ layout: page
 
 <script type="text/javascript">
     let editor = null;
+    const categories = {
+        '일반': ['잡담'],
+        '행사': ['일반'],
+        '공공데이터': ['일반'],
+        '시빅해킹': ['일반'],
+        '프로젝트': ['Meet & Hack', '개인 안심번호']
+    };
 
     function initEditor() {
         const chartOptions = {
@@ -191,19 +193,20 @@ layout: page
             xhr.send(null);
         });
 
+        $('#categories_1st').empty();
+
+        $(categories).each(function (index, item) {
+            const option = $(document.createElement('option'));
+            option.text(item);
+            $('#categories_1st').append(option);
+        });
+        $('#categories_1st > option').first().on('selected', true);
+
         document.getElementById('categories_1st').addEventListener('change', category_change);
         category_change();
     }
 
     function category_change() {
-        const categories = {
-            '일반': ['잡담'],
-            '행사': ['일반'],
-            '공공데이터': ['일반'],
-            '시빅해킹': ['일반'],
-            '프로젝트': ['Meet & Hack', '개인 안심번호']
-        };
-
         const category_1st = $('#categories_1st').val();
 
         $('#categories_2st').empty();
