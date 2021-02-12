@@ -162,7 +162,7 @@ layout: page
         };
 
         xhr.send(JSON.stringify({
-            "author": document.getElementById('author').value,
+            "profile": user_profile,
             "categories": [
                 document.getElementById('categories_1st').value,
                 document.getElementById('categories_2st').value
@@ -247,7 +247,6 @@ layout: page
                     initEditor();
                     initElements();
                     articles[0].className = 'd-block';
-                    document.getElementById('author').value = user_profile.id;
                     const user =
                         user_profile.name === ""
                             ? user_profile.login
