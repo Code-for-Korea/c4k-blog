@@ -45,9 +45,11 @@ layout: page
 
 
 <div id="post-list">
-
+  {{posts}}
+  --------------------- <br>
 {% for post in posts %}
 
+  {{post}}
   <div class="post-preview">
     <h1>
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
