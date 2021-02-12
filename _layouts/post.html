@@ -63,7 +63,13 @@ layout: default
           <img src='{{page.author.avatar_url}}' alt="profile image"
                style="display: block; width: 7rem; height: 7rem; border-radius: 50%; object-fit: cover; box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 4px 0px;">
           <div class="d-flex flex-column justify-content-center ml-3">
-            <p class="h3" style="color: var(--text-color);">{{ page.author.name || page.author.id}}</p>
+            <p class="h3" style="color: var(--text-color);">
+              {% if page.author.name == '' %}
+              {{ page.author.login }}
+              {% else %}
+              {{page.author.name}}
+              {% endif %}
+            </p>
             <p class="h6" style="white-space: pre-wrap; line-height: 1rem;"
             >{{ page.author.bio}}</p>
           </div>
