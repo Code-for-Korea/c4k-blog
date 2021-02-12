@@ -74,6 +74,7 @@ layout: page
 
 <script type="text/javascript">
     let editor = null;
+    let user_profile;
     const categories = {
         '일반': ['잡담'],
         '행사': ['일반'],
@@ -232,6 +233,12 @@ layout: page
             if (xhr.status === 200 || xhr.status === 201) {
                 const json = JSON.parse(xhr.responseText);
                 const profile = json.data.profile;
+
+                user_profile['id'] = profile.id;
+                user_profile['login'] = profile.login;
+                user_profile['avatar_url'] = profile.avatar_url;
+                user_profile['bio'] = profile.bio;
+
                 const articles = document.getElementsByTagName('article');
                 /*에러가 있으면 OAuth 출력*/
                 if (json.data.error && json.data.error === true) {
@@ -240,11 +247,11 @@ layout: page
                     initEditor();
                     initElements();
                     articles[0].className = 'd-block';
-                    document.getElementById('author').value = profile.id;
+                    document.getElementById('author').value = user_profile.id;
                     const user =
-                        profile.name === ""
-                            ? profile.login
-                            : profile.name + '(' + profile.login + ')';
+                        user_profile.name === ""
+                            ? user_profile.login
+                            : user_profile.name + '(' + user_profile.login + ')';
                     document.getElementById('login_user').innerText = 'logged in ' + user;
                 }
             } else {
