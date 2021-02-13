@@ -144,45 +144,42 @@ function category_change() {
     });
 }
 
-/*
-initEditor();
-initElements();
-document.getElementsByTagName('article')[0].className = 'd-block';
-*/
 
-const xhr = new XMLHttpRequest();
-xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
-xhr.withCredentials = true;
-xhr.onreadystatechange = () => {
-    if (xhr.readyState === xhr.DONE) {
-        if (xhr.status === 200 || xhr.status === 201) {
-            const json = JSON.parse(xhr.responseText);
+$(function () {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
+    xhr.withCredentials = true;
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === xhr.DONE) {
+            if (xhr.status === 200 || xhr.status === 201) {
+                const json = JSON.parse(xhr.responseText);
 
-            const articles = document.getElementsByTagName('article');
-            /*에러가 있으면 OAuth 출력*/
-            if (json.data.error && json.data.error === true) {
-                articles[1].className = 'd-block';
+                const articles = document.getElementsByTagName('article');
+                /*에러가 있으면 OAuth 출력*/
+                if (json.data.error && json.data.error === true) {
+                    articles[1].className = 'd-block';
+                } else {
+                    const profile = json.data.profile;
+
+                    user_profile['id'] = profile.id ? profile.id : '';
+                    user_profile['login'] = profile.login ? profile.login : '';
+                    user_profile['name'] = profile.name ? profile.name : '';
+                    user_profile['avatar_url'] = profile.avatar_url ? profile.avatar_url : '';
+                    user_profile['bio'] = profile.bio ? profile.bio : '';
+                    initEditor();
+                    initElements();
+                    articles[0].className = 'd-block';
+                    const user =
+                        user_profile.name === ""
+                            ? user_profile.login
+                            : user_profile.name + '(' + user_profile.login + ')';
+                    document.getElementById('login_user').innerText = 'logged in ' + user;
+                }
             } else {
-                const profile = json.data.profile;
-
-                user_profile['id'] = profile.id ? profile.id : '';
-                user_profile['login'] = profile.login ? profile.login : '';
-                user_profile['name'] = profile.name ? profile.name : '';
-                user_profile['avatar_url'] = profile.avatar_url ? profile.avatar_url : '';
-                user_profile['bio'] = profile.bio ? profile.bio : '';
-                initEditor();
-                initElements();
-                articles[0].className = 'd-block';
-                const user =
-                    user_profile.name === ""
-                        ? user_profile.login
-                        : user_profile.name + '(' + user_profile.login + ')';
-                document.getElementById('login_user').innerText = 'logged in ' + user;
+                console.error(JSON.parse(xhr.responseText));
             }
-        } else {
-            console.error(JSON.parse(xhr.responseText));
         }
-    }
-};
+    };
 
-xhr.send(null);
+    xhr.send(null);
+});

@@ -24,6 +24,10 @@ layout: page
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
 <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
 
+{% assign js_src = 'editor' | prepend: '/assets/js/' | append: '.min.js' | relative_url %}
+
+<script async src="{{ js_src }}"></script>
+
 <article class="d-none">
     <input type="hidden" id="author">
     <div class="input-group mb-2">
