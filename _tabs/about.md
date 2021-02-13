@@ -12,11 +12,11 @@ order: 4
 
 
 <div class="row mb-3">
-<div class="col-7"><a class="img-hyperlink" href="https://codefor.kr"><img src="/assets/img/about/Codeforkorea_logo_-2_1000px.png" alt="코드포코리아 홈페이지 바로가기"></a></div>
-<div class="col-6" style="padding:0"><a class="img-hyperlink" href="https://codefor.kr/wiki/%EC%8A%AC%EB%9E%99_%EA%B0%80%EC%9D%B4%EB%93%9C"><img style="padding: 0;" src="/assets/img/about/슬랙가이드.png" alt="우리가 어떻게 활동하는지 슬랙 가이드에서 알아보기"></a> </div>
-<div class="col-6" style="padding:0"><a class="img-hyperlink" href="https://blog.codefor.kr"><img style="padding: 0;" src="/assets/img/about/블로그.png" alt="시빅해킹 이야기와 멤버들 각자의 깊은 생각을 블로그에서 알아보기"></a> </div>
-<div class="col-6" style="padding:0"><a class="img-hyperlink" href="https://www.facebook.com/code.for.korea"><img style="padding: 0;" src="/assets/img/about/페이스북.png" alt="우리의 활동과 소식을 널리 알리는 페이스북 페이지 알아보기"></a> </div>
-<div class="col-6" style="padding:0"><a class="img-hyperlink" href="http://bit.ly/codeforkorea"><img style="padding: 0;" src="/assets/img/about/슬랙.png" alt="누구나 자유로운 대한민국 시빅해커 소통의 장, 슬랙 세상으로 뛰어들기"></a> </div>
+<div class="col-7"><a target="_blank" class="img-hyperlink" href="https://codefor.kr"><img src="/assets/img/about/Codeforkorea_logo_-2_1000px.png" alt="코드포코리아 홈페이지 바로가기"></a></div>
+<div class="col-6" style="padding:0"><a target="_blank" class="img-hyperlink" href="https://codefor.kr/wiki/%EC%8A%AC%EB%9E%99_%EA%B0%80%EC%9D%B4%EB%93%9C"><img style="padding: 0;" src="/assets/img/about/슬랙가이드.png" alt="우리가 어떻게 활동하는지 슬랙 가이드에서 알아보기"></a> </div>
+<div class="col-6" style="padding:0"><a target="_blank" class="img-hyperlink" href="https://blog.codefor.kr"><img style="padding: 0;" src="/assets/img/about/블로그.png" alt="시빅해킹 이야기와 멤버들 각자의 깊은 생각을 블로그에서 알아보기"></a> </div>
+<div class="col-6" style="padding:0"><a target="_blank" class="img-hyperlink" href="https://www.facebook.com/code.for.korea"><img style="padding: 0;" src="/assets/img/about/페이스북.png" alt="우리의 활동과 소식을 널리 알리는 페이스북 페이지 알아보기"></a> </div>
+<div class="col-6" style="padding:0"><a target="_blank" class="img-hyperlink" href="http://bit.ly/codeforkorea"><img style="padding: 0;" src="/assets/img/about/슬랙.png" alt="누구나 자유로운 대한민국 시빅해커 소통의 장, 슬랙 세상으로 뛰어들기"></a> </div>
 </div>
 
 > 시빅해킹을 통해 안전하고 신뢰할 수 있는 사회를 만들어 나가고자 합니다.
