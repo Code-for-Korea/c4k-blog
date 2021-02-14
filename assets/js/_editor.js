@@ -37,7 +37,7 @@ function addImage(blob) {
                             editor.setMarkdown(markdown);
                         } else {
                             editor.changeMode('markdown', true);
-                            editor.setMarkdown(markdown);
+                            editor.insertText(markdown);
                             editor.changeMode('wysiwyg', true);
                         }
                         editor.setMarkdown(markdown);
