@@ -16,6 +16,9 @@ function addImage(blob) {
         const file_mime = result[1];
         const file_encode = result[2];
 
+        console.log(file_encode);
+        console.log(file_mime);
+
         const xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://codefor.kr:8443/api/github/image');
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
