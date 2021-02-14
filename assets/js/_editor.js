@@ -40,7 +40,6 @@ function addImage(blob) {
                             editor.insertText(markdown);
                             editor.changeMode('wysiwyg', true);
                         }
-                        editor.setMarkdown(markdown);
                     }
                 } else {
                     console.error(xhr.responseText);
