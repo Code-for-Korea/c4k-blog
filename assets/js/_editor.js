@@ -32,7 +32,15 @@ function addImage(blob) {
                         const file_name = json.data.msg.content.name;
                         const path = json.data.msg.content.path;
                         const markdown = `![${file_name}](${prefix + path})`;
-                        editor.insertText(markdown);
+
+                        if (editor.isMarkdownMode()) {
+                            editor.setMarkdown(markdown);
+                        } else {
+                            editor.changeMode('markdown', true);
+                            editor.setMarkdown(markdown);
+                            editor.changeMode('wysiwyg', true);
+                        }
+                        editor.setMarkdown(markdown);
                     }
                 } else {
                     console.error(xhr.responseText);
