@@ -17,7 +17,7 @@ function addImage(blob) {
         const file_encode = result[2];
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://codefor.kr:8443/api/github/image');
+        xhr.open('POST', 'https://codefor.kr:8443/api/github/image', true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.withCredentials = true;
         xhr.onreadystatechange = () => {
