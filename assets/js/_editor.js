@@ -28,8 +28,11 @@ function addImage(blob) {
                         alert("에러발생");
                         console.error(json);
                     } else {
-                        console.log(xhr.responseText);
-                        editor.insertText(xhr.responseText);
+                        const prefix = 'https://raw.githubusercontent.com/Code-for-Korea/c4k-blog-front/main/';
+                        const file_name = json.data.msg.content.name;
+                        const path = json.data.msg.content.path;
+                        const markdown = `![${file_name}](${prefix + path})`;
+                        editor.insertText(markdown);
                     }
                 } else {
                     console.error(xhr.responseText);
