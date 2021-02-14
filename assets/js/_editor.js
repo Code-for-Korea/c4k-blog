@@ -34,7 +34,7 @@ function addImage(blob) {
                         const markdown = `![${file_name}](${prefix + path})`;
 
                         if (editor.isMarkdownMode()) {
-                            editor.setMarkdown(markdown);
+                            editor.insertText(markdown);
                         } else {
                             editor.changeMode('markdown', true);
                             editor.insertText(markdown);
