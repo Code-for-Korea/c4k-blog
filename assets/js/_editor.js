@@ -187,11 +187,6 @@ function category_change() {
 
 
 $(function () {
-
-    initEditor();
-    initElements();
-    document.getElementsByTagName('article')[0].className = 'd-block';
-
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
     xhr.withCredentials = true;
