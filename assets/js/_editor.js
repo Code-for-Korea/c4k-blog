@@ -8,6 +8,44 @@ const categories = {
     '프로젝트': ['Meet & Hack', '개인 안심번호']
 };
 
+function addImage(blob) {
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+        const regex = /data:(.*\/*);base64,(.*)/g;
+        const result = regex.exec(String(reader.result));
+        const file_mime = result[1];
+        const file_encode = result[2];
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://codefor.kr:8443/api/github/image');
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    const json = JSON.parse(xhr.responseText);
+                    if (json.data.error && json.data.error === true) {
+                        alert("에러발생");
+                        console.error(json);
+                    } else {
+                        console.log(xhr.responseText);
+                        editor.insertText(xhr.responseText);
+                    }
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.send(JSON.stringify({
+            "imageEncode": file_encode,
+            "MIME": file_mime
+        }));
+
+    });
+    reader.readAsDataURL(blob);
+}
+
 function initEditor() {
     const chartOptions = {
         /*
@@ -34,7 +72,10 @@ function initEditor() {
             [toastui.Editor.plugin.chart, chartOptions],
             toastui.Editor.plugin.codeSyntaxHighlight,
             [toastui.Editor.plugin.colorSyntax, colorSyntaxOptions]
-        ]
+        ],
+        hooks: {
+            addImageBlobHook: addImage
+        }
     });
 }
 
@@ -146,6 +187,11 @@ function category_change() {
 
 
 $(function () {
+
+    initEditor();
+    initElements();
+    document.getElementsByTagName('article')[0].className = 'd-block';
+
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://codefor.kr:8443/api/github/authorize');
     xhr.withCredentials = true;
