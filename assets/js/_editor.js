@@ -1,6 +1,7 @@
 let editor = null;
 let user_profile = {};
 const categories = {
+    '일반': ['잡담'],
     '행사': ['일반'],
     '공공데이터': ['일반'],
     '시빅해킹': ['일반'],
