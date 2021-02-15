@@ -26,7 +26,7 @@ SES로 relay 하는 postfix 세팅과 자체 서버로 이메일을 수신하는
 
 # 문제의 시작
 
-poppassd 설치하는 것은 전혀 문제가 없었다. (참고 링크: [Install Poppassd in CentOS 7](https://tweenpath.net/install-poppassd-centos-7/))
+poppassd를 설치하는 것은 전혀 문제가 없었다. (참고 링크: [Install Poppassd in CentOS 7](https://tweenpath.net/install-poppassd-centos-7/))
 
 telnet을 이용해 테스트해봐도 정상 작동한다.
 
@@ -41,7 +41,7 @@ newpass <..>
 
 ![2021-02-16-7I1Tk.png](/assets/img/posts/2021-02-16/2021-02-16-7I1Tk.png)
 
-## 분석
+# 분석
 
 왜..? 우선 해당 요청에 주요하게 작용하는 파일은 아래와 같았다.
 
