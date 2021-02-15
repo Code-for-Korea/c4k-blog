@@ -40,9 +40,9 @@ function addImage(blob) {
                         if (editor.isMarkdownMode()) {
                             editor.insertText(markdown);
                         } else {
-                            editor.changeMode('markdown', true);
+                            editor.changeMode('markdown', false);
                             editor.insertText(markdown);
-                            editor.changeMode('wysiwyg', true);
+                            editor.changeMode('wysiwyg', false);
                         }
                     }
                 } else {
