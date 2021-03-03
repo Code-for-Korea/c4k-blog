@@ -8,7 +8,7 @@ author:
   bio: "모든 잘못은 전적으로 우리 프로그래머에게 있다."
 date: "2021-03-02 23:37:06"
 categories: [기술,  Linux]
-tags: [리눅스,   Linux,   postfix,   dovecot,   ses,   aws,   이메일]
+tags: [Linux,   postfix,   dovecot,   ses,   aws,   이메일]
 ---
 ## 개요
 Code for Korea의 이메일 서버는 Amazon SES를 활용하고 있다.
